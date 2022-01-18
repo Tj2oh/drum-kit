@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kevin Hart Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <div class="keys">
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">What do you get?</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">Now is the Time</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">Suppose to be afraid?</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">And you wonder?</span>
+    </div>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">1 simple favor</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">Do my homework!</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">1 thing im good at </span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">what i should do</span>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Hold on</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="./sounds/WHAT DO YOU GET OUT OF LYING SO MUCH - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="83" src="./sounds/YOU WANT TO SAY ANYTHING NICE TO ME - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="68" src="./sounds/AM I SUPPOSED TO BE AFRAID OF YOU - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="70" src="./sounds/AND YOU WONDER WHY WE NOT FRIENDS ANYMORE - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="71" src="./sounds/I ASKED YOU TO DO ME 1 SIMPLE FAVOR PT1 - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="72" src="./sounds/I ASKED YOU TO DO ME 1 SIMPLE FAVOR PT2 - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="74" src="./sounds/I ASKED YOU TO DO ME 1 SIMPLE FAVOR PT3 - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="75" src="./sounds/I ASKED YOU TO DO ME 1 SIMPLE FAVOR PT4 - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+  <audio data-key="76" src="./sounds/I GOTTA TAKE A LEAK FIRST - AUDIO FROM JAYUZUMI.COM.mp3"></audio>
+
+<script>
+ 
+   function playsound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    if (!audio) return; // stop the function from running all together
+    audio.currentTime = 0; // rewind to the start 
+    audio.play();
+    key.classList.add('playing');
+    }
+
+    function removeTransition(e) {
+      if (e.propertyName !== 'transform') return; //skip it if its not a transform
+      this.classList.remove('playing'); 
+    }
+
+    const keys = document.querySelectorAll('.key');
+    keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    window.addEventListener('keydown', playsound);
+    
+
+</script>
+
+
+</body>
+</html>
